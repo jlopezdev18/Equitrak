@@ -1,16 +1,34 @@
-# React + Vite
+# Equitrak - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React con TypeScript y Vite. Formularios locales con React Hook Form.
 
-Currently, two official plugins are available:
+## Desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+Login: `/`. Registro: `/#registro`. Las vistas parten de las plantillas HTML
+del proyecto y usan Vercel React Best Practices.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Comandos
 
-## Expanding the Oxlint configuration
+| Comando | Uso |
+| --- | --- |
+| `npm test` | Ejecutar las 37 pruebas de la UI. |
+| `npm run test:watch` | Repetir pruebas al guardar cambios. |
+| `npm run typecheck` | Comprobar los tipos de TypeScript. |
+| `npm run lint` | Revisar el código con Oxlint. |
+| `npm run build` | Comprobar tipos y compilar a `dist/`. |
+| `npm run preview` | Servir la compilación localmente. |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Estructura
+
+- `src/features/auth/`: vistas, componentes de formulario, tipos, reglas y CSS.
+- `src/index.css`: estilos globales y variables de colores y espaciado.
+- `src/App.test.tsx`: casos UI-01 a UI-16 y navegación.
+- `src/test/setup.ts`: configuración de las pruebas.
+
+El alcance y los criterios están en [autenticacion.md](../docs/autenticacion.md).
+La revisión visual final de ambas vistas sigue pendiente.
