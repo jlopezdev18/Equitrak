@@ -38,12 +38,8 @@
   .brand-mark{width:54px;height:54px;flex-shrink:0}
   .brand-name{font-size:clamp(38px,3.2vw,48px);font-weight:850;letter-spacing:-.05em;line-height:1}
   .brand-caption{font-size:14px;line-height:1.45;text-align:center;margin:6px auto 0;color:#3b5260;max-width:430px;font-weight:500}
-  .auth-tabs{display:flex;background:#e9f0ee;border-radius:9px;padding:3px;margin-top:14px;gap:4px;max-width:414px;width:100%;margin-left:auto;margin-right:auto}
-  .auth-tab{flex:1;border:0;background:transparent;padding:8px 12px;border-radius:7px;font-size:13px;font-weight:720;color:#5a6d77;transition:.2s all}
-  .auth-tab:hover{color:var(--ink);background:rgba(255,255,255,.5)}
-  .auth-tab.active{background:#fff;color:var(--teal);box-shadow:0 2px 7px rgba(0,0,0,.07)}
   .form{margin-top:16px;width:100%}
-  #sign-in{max-width:414px;margin-left:auto;margin-right:auto}
+  #sign-in,#sign-up{max-width:414px;margin-left:auto;margin-right:auto}
   .form-label{display:block;font-size:12px;font-weight:720;margin-bottom:5px;color:var(--ink)}
   .field{margin-bottom:14px}
   .field-inner{display:flex;align-items:center;position:relative}
@@ -63,7 +59,7 @@
   .remember input:checked:after{content:"";width:6px;height:3.5px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:translateY(-1px) rotate(-45deg)}
   .text-link{border:0;background:none;padding:3px 0;text-decoration:none;color:#b9531f;font-size:12px;font-weight:700;white-space:nowrap}
   .text-link:hover{text-decoration:underline}
-  .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px}
+  .fields-grid{display:grid;grid-template-columns:1fr;gap:12px}
   .fields-grid .field{margin-bottom:0}
   .terms-check{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-size:11.5px;color:#3b5260;line-height:1.4;margin-top:10px}
   .terms-check input{appearance:none;display:grid;place-items:center;width:16px;height:16px;min-width:16px;margin:1px 0 0;border:1.5px solid #9eacb1;border-radius:4px;background:#fff;cursor:pointer}
@@ -75,16 +71,16 @@
   .submit:hover{transform:translateY(-1px);box-shadow:0 12px 22px rgba(11,87,87,.18);background:#073f43}
   .submit svg{height:16px;width:16px}
   .auth-switch{text-align:center;font-size:12px;color:#5a6e78;margin:11px 0 0}
-  .switch-link{border:0;background:none;padding:0;color:var(--orange);font-weight:750;cursor:pointer;font-size:12px}
+  .switch-link{border:0;background:none;padding:0;color:var(--orange);font-weight:750;cursor:pointer;font-size:12px;text-decoration:none}
   .switch-link:hover{text-decoration:underline}
   .message{display:none;margin-top:10px;border:1px solid #d8c5b0;border-radius:7px;padding:9px 12px;font-size:12px;line-height:1.45;color:#604421;background:#fff6eb}
   .message.show{display:block}
   .message.success{border-color:#99cfb8;background:#ebf7f1;color:#135939}
   .auth-footer{position:static;margin-top:14px;text-align:center;font-size:11px;color:#839099;flex-shrink:0}
   .mobile-photo{display:none}
-  @media(max-width:1100px){main{grid-template-columns:minmax(0,52%) minmax(410px,48%)}.hero{padding-left:35px;padding-right:35px}.hero h1{font-size:clamp(37px,4.2vw,50px)}.auth{padding-left:36px;padding-right:36px}}
+  @media(max-width:1100px){main{grid-template-columns:minmax(0,1fr) minmax(410px,48%)}.hero{padding-left:35px;padding-right:35px}.hero h1{font-size:clamp(37px,4.2vw,50px)}.auth{padding-left:36px;padding-right:36px}}
   @media(max-width:760px){main{display:flex;flex-direction:column;min-height:100dvh}.hero{display:none}.mobile-photo{display:block;width:100%;position:relative;height:clamp(160px,42vw,240px);overflow:hidden;background:#0f1a20}.mobile-photo:before{content:"";position:absolute;inset:0;background:var(--photo) center 65% / cover no-repeat}.mobile-photo:after{content:"";position:absolute;inset:auto 0 0;height:24px;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent)}.auth{flex:1;justify-content:flex-start;padding:26px clamp(18px,5vw,48px) 40px;background:#fbf9f6}.auth-content{max-width:490px}.brand-mark{width:50px;height:50px}.brand-name{font-size:38px}.brand-caption{font-size:14px;margin-top:6px;max-width:340px}.form{margin-top:18px}.auth-footer{position:static;margin-top:24px}.field{margin-bottom:14px}.fields-grid .field{margin-bottom:0}.hero-photo{display:none}}
-  @media(max-width:580px){.fields-grid{grid-template-columns:1fr;gap:9px}.auth-content{max-width:100%}#sign-in{max-width:100%}}
+  @media(max-width:580px){.fields-grid{grid-template-columns:1fr;gap:9px}.auth-content{max-width:100%}#sign-in,#sign-up{max-width:100%}}
   @media(max-width:380px){.mobile-photo{height:150px}.auth{padding:20px 16px 28px}.brand-mark{width:44px;height:44px}.brand-name{font-size:32px}.brand-caption{font-size:13px}.form{margin-top:16px}.options{font-size:11px}.text-link{font-size:11px}.auth-footer{margin-top:20px}}
   @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
   </style>
@@ -118,12 +114,6 @@
    </div>
    <p class="brand-caption" id="brand-caption">Diseñado para el alquiler de equipos, herramientas y maquinaria.</p>
 
-   <!-- Selector de Modo: Iniciar sesión / Crear cuenta -->
-   <div class="auth-tabs" role="tablist" aria-label="Modo de autenticación">
-    <button class="auth-tab" id="tab-login" role="tab" aria-selected="false" aria-controls="sign-in" type="button">Iniciar sesión</button>
-    <button class="auth-tab active" id="tab-register" role="tab" aria-selected="true" aria-controls="sign-up" type="button">Crear cuenta</button>
-   </div>
-
    <!-- Formulario 1: Inicio de Sesión -->
    <form class="form" id="sign-in" style="display:none" novalidate>
     <div class="field">
@@ -148,7 +138,7 @@
      <button class="text-link" type="button" id="forgot">¿Olvidó su contraseña?</button>
     </div>
     <button class="submit" type="submit">Iniciar sesión <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></button>
-    <p class="auth-switch">¿No tiene una cuenta? <button type="button" class="switch-link" id="goto-register">Regístrese aquí</button></p>
+    <p class="auth-switch">¿No tiene una cuenta? <a href="#registro" class="switch-link" id="goto-register">Regístrese aquí</a></p>
     <div id="feedback" class="message" role="status" aria-live="polite"></div>
    </form>
 
@@ -163,17 +153,10 @@
       </div>
      </div>
      <div class="field">
-      <label class="form-label" for="reg-company">Nombre de la empresa</label>
-      <div class="field-inner">
-       <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01M8 18h.01M16 18h.01"/></svg>
-       <input id="reg-company" name="company" autocomplete="organization" type="text" placeholder="Ej. Alquileres del Norte" required>
-      </div>
-     </div>
-     <div class="field">
-      <label class="form-label" for="reg-email">Correo corporativo</label>
+      <label class="form-label" for="reg-email">Correo electrónico</label>
       <div class="field-inner">
        <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m3 7 9 7 9-7"/></svg>
-       <input id="reg-email" name="email" autocomplete="email" inputmode="email" type="email" placeholder="correo@empresa.com" required>
+       <input id="reg-email" name="email" autocomplete="email" inputmode="email" type="email" placeholder="correo@ejemplo.com" required>
       </div>
      </div>
      <div class="field">
@@ -209,7 +192,7 @@
      <span>Acepto los <a href="#" id="view-terms">Términos del servicio</a> y la <a href="#" id="view-privacy">Política de privacidad</a> de Equitrak.</span>
     </label>
     <button class="submit" type="submit">Crear cuenta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 14 0m-6-6 6 6-6 6"/></svg></button>
-    <p class="auth-switch">¿Ya tiene una cuenta? <button type="button" class="switch-link" id="goto-login">Inicie sesión aquí</button></p>
+    <p class="auth-switch">¿Ya tiene una cuenta? <a href="#iniciar-sesion" class="switch-link" id="goto-login">Inicie sesión aquí</a></p>
     <div id="reg-feedback" class="message" role="status" aria-live="polite"></div>
    </form>
 
@@ -219,8 +202,6 @@
 </main>
 <script>
 (function(){
-  const tabLogin = document.getElementById('tab-login');
-  const tabRegister = document.getElementById('tab-register');
   const formLogin = document.getElementById('sign-in');
   const formRegister = document.getElementById('sign-up');
   const gotoRegister = document.getElementById('goto-register');
@@ -231,7 +212,6 @@
   const feedback = document.getElementById('feedback');
 
   const regName = document.getElementById('reg-name');
-  const regCompany = document.getElementById('reg-company');
   const regEmail = document.getElementById('reg-email');
   const regPhone = document.getElementById('reg-phone');
   const regPassword = document.getElementById('reg-password');
@@ -242,7 +222,7 @@
   function clearAllFeedback(){
     feedback.textContent = ''; feedback.className = 'message';
     regFeedback.textContent = ''; regFeedback.className = 'message';
-    [email, password, regName, regCompany, regEmail, regPhone, regPassword, regPasswordConfirm].forEach(function(inp){
+    [email, password, regName, regEmail, regPhone, regPassword, regPasswordConfirm].forEach(function(inp){
       if(inp) inp.removeAttribute('aria-invalid');
     });
   }
@@ -250,10 +230,6 @@
   function setMode(mode){
     clearAllFeedback();
     if(mode === 'register'){
-      tabLogin.classList.remove('active');
-      tabLogin.setAttribute('aria-selected', 'false');
-      tabRegister.classList.add('active');
-      tabRegister.setAttribute('aria-selected', 'true');
       formLogin.style.display = 'none';
       formRegister.style.display = 'block';
       document.title = 'Crear cuenta — Equitrak';
@@ -262,10 +238,6 @@
       }
       setTimeout(function(){ regName.focus(); }, 50);
     } else {
-      tabRegister.classList.remove('active');
-      tabRegister.setAttribute('aria-selected', 'false');
-      tabLogin.classList.add('active');
-      tabLogin.setAttribute('aria-selected', 'true');
       formRegister.style.display = 'none';
       formLogin.style.display = 'block';
       document.title = 'Iniciar sesión — Equitrak';
@@ -276,10 +248,8 @@
     }
   }
 
-  tabLogin.addEventListener('click', function(){ setMode('login'); });
-  tabRegister.addEventListener('click', function(){ setMode('register'); });
-  if(gotoRegister) gotoRegister.addEventListener('click', function(){ setMode('register'); });
-  if(gotoLogin) gotoLogin.addEventListener('click', function(){ setMode('login'); });
+  if(gotoRegister) gotoRegister.addEventListener('click', function(event){ event.preventDefault(); setMode('register'); });
+  if(gotoLogin) gotoLogin.addEventListener('click', function(event){ event.preventDefault(); setMode('login'); });
 
   function setupReveal(btnId, inputId){
     const btn = document.getElementById(btnId);
@@ -302,7 +272,7 @@
   }
 
   [email, password].forEach(function(inp){ inp.addEventListener('input', clearAllFeedback); });
-  [regName, regCompany, regEmail, regPhone, regPassword, regPasswordConfirm, regTerms].forEach(function(inp){
+  [regName, regEmail, regPhone, regPassword, regPasswordConfirm, regTerms].forEach(function(inp){
     if(inp) inp.addEventListener('input', clearAllFeedback);
   });
 
@@ -348,12 +318,6 @@
       notify(regFeedback, 'Por favor, ingrese su nombre y apellido.');
       return;
     }
-    if(!regCompany.value.trim()){
-      regCompany.setAttribute('aria-invalid', 'true');
-      regCompany.focus();
-      notify(regFeedback, 'Por favor, ingrese el nombre de su empresa o negocio.');
-      return;
-    }
     if(!regEmail.value.trim() || !regEmail.validity.valid){
       regEmail.setAttribute('aria-invalid', 'true');
       regEmail.focus();
@@ -383,7 +347,7 @@
       return;
     }
 
-    notify(regFeedback, '¡Cuenta creada exitosamente para ' + regName.value.trim() + ' (' + regCompany.value.trim() + ')! Conecte su backend para iniciar operaciones.', true);
+    notify(regFeedback, 'Vista previa: formulario de registro validado para ' + regName.value.trim() + '.', true);
   });
 
   if(window.location.hash === '#login' || window.location.hash === '#iniciar-sesion'){
