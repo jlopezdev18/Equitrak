@@ -1,0 +1,50 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Formato, lint y pruebas
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/package-lock.json
+            backend/package-lock.json
+
+      - name: Instalar herramientas del proyecto
+        run: npm ci
+
+      - name: Instalar dependencias del frontend
+        run: npm ci --prefix frontend
+
+      - name: Instalar dependencias del backend
+        run: npm ci --prefix backend
+
+      - name: Comprobar formato de todo el proyecto
+        run: npm run format:check
+
+      - name: Ejecutar lint de todo el proyecto
+        run: npm run lint
+
+      - name: Ejecutar pruebas del frontend y backend
+        run: npm test

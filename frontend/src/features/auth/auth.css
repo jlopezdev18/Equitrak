@@ -47,7 +47,13 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgb(11 22 28 / 86%) 0%, rgb(11 22 28 / 55%) 38%, rgb(11 22 28 / 14%) 66%, transparent 86%);
+  background: linear-gradient(
+    180deg,
+    rgb(11 22 28 / 86%) 0%,
+    rgb(11 22 28 / 55%) 38%,
+    rgb(11 22 28 / 14%) 66%,
+    transparent 86%
+  );
 }
 
 .auth-page .hero::after {
@@ -259,7 +265,9 @@
   color: #102f3e;
   background: rgb(255 255 255 / 75%);
   font-size: 0.875rem;
-  transition: border-color var(--motion-duration) ease, box-shadow var(--motion-duration) ease;
+  transition:
+    border-color var(--motion-duration) ease,
+    box-shadow var(--motion-duration) ease;
 }
 
 .auth-page .field input.has-reveal {
@@ -419,7 +427,9 @@
   font-size: 0.90625rem;
   font-weight: 760;
   box-shadow: 0 8px 18px rgb(11 87 87 / 12%);
-  transition: transform var(--motion-duration) ease, box-shadow var(--motion-duration) ease;
+  transition:
+    transform var(--motion-duration) ease,
+    box-shadow var(--motion-duration) ease;
 }
 
 .auth-page .submit:hover {

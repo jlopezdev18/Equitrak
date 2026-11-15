@@ -10,5 +10,9 @@ export default function FormFeedback({ id, feedback }: FormFeedbackProps) {
     ? `message show${feedback.type === 'success' ? ' success' : ''}`
     : undefined
 
-  return <div id={id} className={className} role="status" aria-live="polite">{feedback?.message}</div>
+  return (
+    <div id={id} className={className} role="status" aria-live="polite">
+      {feedback?.message}
+    </div>
+  )
 }

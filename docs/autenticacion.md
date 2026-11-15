@@ -51,13 +51,13 @@ Las reglas de esta etapa siguen los formularios de las plantillas.
 
 ### Inicio de sesión
 
-| Campo o control | Comportamiento esperado |
-| --- | --- |
-| Correo electrónico | Obligatorio y con formato de correo válido; se ignoran espacios externos al validar. |
-| Contraseña | Obligatoria; inicialmente oculta. Se conserva exactamente lo escrito. |
-| Mostrar u ocultar contraseña | Alterna la visibilidad y actualiza el nombre accesible y `aria-pressed`. |
-| Recordarme | Inicialmente marcado, como en la plantilla; permite cambiar su estado durante la interacción. |
-| ¿Olvidó su contraseña? | Muestra un aviso de vista previa. |
+| Campo o control              | Comportamiento esperado                                                              |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| Correo electrónico           | Obligatorio y con formato de correo válido; se ignoran espacios externos al validar. |
+| Contraseña                   | Obligatoria; inicialmente oculta. Se conserva exactamente lo escrito.                |
+| Mostrar u ocultar contraseña | Alterna la visibilidad y actualiza el nombre accesible y `aria-pressed`.             |
+| Recordarme                   | Inicialmente desmarcado; permite cambiar su estado durante la interacción.           |
+| ¿Olvidó su contraseña?       | Muestra un aviso de vista previa.                                                    |
 
 El login exige una contraseña no vacía. La longitud mínima del registro no se
 aplica a este formulario.
@@ -69,16 +69,16 @@ electrónico, teléfono de contacto, contraseña y confirmar contraseña, en ese
 orden. Contraseña y confirmar contraseña ocupan filas consecutivas de ancho
 completo. La navegación entre vistas se realiza con los enlaces inferiores.
 
-| Campo o control | Comportamiento esperado |
-| --- | --- |
-| Nombre y apellido | Obligatorio; una cadena vacía o formada solo por espacios es inválida. No se exige un número fijo de palabras. |
-| Correo electrónico | Obligatorio y con formato de correo válido; se ignoran espacios externos al validar. Se admiten proveedores de correo personales. |
-| Teléfono de contacto | Obligatorio y con al menos 7 caracteres después de quitar espacios externos, siguiendo la validación del prototipo. |
-| Contraseña | Obligatoria, con un mínimo de 8 caracteres, como indica la plantilla. Inicialmente oculta; se conserva exactamente lo escrito. |
-| Confirmar contraseña | Obligatoria y con coincidencia exacta con la contraseña. Inicialmente oculta. |
-| Mostrar u ocultar contraseñas | Cada botón controla únicamente su campo y conserva el valor introducido. |
-| Aceptación de términos y privacidad | Inicialmente desmarcada; debe marcarse para completar la validación local. |
-| Enlaces a términos y privacidad | Muestran los avisos de vista previa correspondientes. |
+| Campo o control                     | Comportamiento esperado                                                                                                           |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Nombre y apellido                   | Obligatorio; una cadena vacía o formada solo por espacios es inválida. No se exige un número fijo de palabras.                    |
+| Correo electrónico                  | Obligatorio y con formato de correo válido; se ignoran espacios externos al validar. Se admiten proveedores de correo personales. |
+| Teléfono de contacto                | Obligatorio y con al menos 7 caracteres después de quitar espacios externos, siguiendo la validación del prototipo.               |
+| Contraseña                          | Obligatoria, con un mínimo de 8 caracteres, como indica la plantilla. Inicialmente oculta; se conserva exactamente lo escrito.    |
+| Confirmar contraseña                | Obligatoria y con coincidencia exacta con la contraseña. Inicialmente oculta.                                                     |
+| Mostrar u ocultar contraseñas       | Cada botón controla únicamente su campo y conserva el valor introducido.                                                          |
+| Aceptación de términos y privacidad | Inicialmente desmarcada; debe marcarse para completar la validación local.                                                        |
+| Enlaces a términos y privacidad     | Muestran los avisos de vista previa correspondientes.                                                                             |
 
 ### Mensajes y navegación
 
@@ -100,24 +100,24 @@ Los casos UI-01 a UI-16 están automatizados en
 user-event y jsdom. Cada ID aparece en el nombre de su prueba; la suite contiene
 37 pruebas, incluyendo casos parametrizados y navegación mediante fragmentos.
 
-| ID | Acción o condición | Resultado observable |
-| --- | --- | --- |
-| UI-01 | Abrir la vista de login. | Formulario, etiquetas y controles de `equitrak-login.html`; únicamente el enlace inferior para cambiar de vista, contraseña oculta y «Recordarme» marcado. |
-| UI-02 | Abrir la vista de registro. | Los cinco campos de `equitrak-register.html` en el orden definido, etiqueta «Correo electrónico», contraseñas ocultas y términos desmarcados. |
-| UI-03 | Usar los enlaces inferiores «Regístrese aquí» e «Inicie sesión aquí». | Solo aparece el formulario seleccionado, se limpian errores y el foco llega al primer campo. Los controles son enlaces accesibles mediante teclado. |
-| UI-04 | Pulsar mostrar u ocultar en cada uno de los tres campos de contraseña. | Solo cambia la visibilidad del campo elegido; se conserva su valor y se actualizan su nombre accesible y `aria-pressed`. |
-| UI-05 | Recorrer los formularios con teclado y enviarlos con campos inválidos. | Controles con etiquetas, interacción mediante teclado y foco en el primer campo inválido, identificado con `aria-invalid`. |
-| UI-06 | Enviar registro con cada campo obligatorio vacío o con texto formado solo por espacios donde corresponda. | Se muestra el error correspondiente y no aparece feedback de validación completada. |
-| UI-07 | Introducir un correo con formato inválido en cada formulario. | Se identifica el campo y se muestra el mensaje de correo inválido. |
-| UI-08 | Introducir contraseñas de 7 y 8 caracteres en el registro. | La primera se rechaza y la segunda supera la regla de longitud. Se conserva el texto escrito, incluidos espacios. |
-| UI-09 | Enviar contraseñas distintas o términos sin aceptar. | Mensaje específico para cada condición; no aparece feedback de validación completada. |
-| UI-10 | Enviar login sin correo o sin contraseña. | Mensaje del campo correspondiente; probar cada ausencia por separado. |
-| UI-11 | Introducir un teléfono vacío, de 6 caracteres y de 7 caracteres después de quitar espacios externos. | Se rechazan los dos primeros y el último supera la regla de longitud de la plantilla. |
-| UI-12 | Enviar login con datos válidos para la validación local. | Aviso de vista previa, sin recargar la página ni abandonar la vista de login. |
-| UI-13 | Enviar registro con todos los campos válidos, contraseñas coincidentes y términos aceptados. | Aviso de vista previa, sin recargar la página ni abandonar la vista de registro. |
-| UI-14 | Editar los datos después de un error o aviso. | Se limpia el feedback anterior y el formulario permite una nueva validación. Probar ambas vistas. |
-| UI-15 | Marcar y desmarcar «Recordarme». | El control refleja el estado elegido y no altera los valores de los campos. |
-| UI-16 | Usar recuperación de contraseña, términos y privacidad. | Cada control muestra su aviso de vista previa correspondiente y mantiene el formulario visible. |
+| ID    | Acción o condición                                                                                        | Resultado observable                                                                                                                                          |
+| ----- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| UI-01 | Abrir la vista de login.                                                                                  | Formulario, etiquetas y controles de `equitrak-login.html`; únicamente el enlace inferior para cambiar de vista, contraseña oculta y «Recordarme» desmarcado. |
+| UI-02 | Abrir la vista de registro.                                                                               | Los cinco campos de `equitrak-register.html` en el orden definido, etiqueta «Correo electrónico», contraseñas ocultas y términos desmarcados.                 |
+| UI-03 | Usar los enlaces inferiores «Regístrese aquí» e «Inicie sesión aquí».                                     | Solo aparece el formulario seleccionado, se limpian errores y el foco llega al primer campo. Los controles son enlaces accesibles mediante teclado.           |
+| UI-04 | Pulsar mostrar u ocultar en cada uno de los tres campos de contraseña.                                    | Solo cambia la visibilidad del campo elegido; se conserva su valor y se actualizan su nombre accesible y `aria-pressed`.                                      |
+| UI-05 | Recorrer los formularios con teclado y enviarlos con campos inválidos.                                    | Controles con etiquetas, interacción mediante teclado y foco en el primer campo inválido, identificado con `aria-invalid`.                                    |
+| UI-06 | Enviar registro con cada campo obligatorio vacío o con texto formado solo por espacios donde corresponda. | Se muestra el error correspondiente y no aparece feedback de validación completada.                                                                           |
+| UI-07 | Introducir un correo con formato inválido en cada formulario.                                             | Se identifica el campo y se muestra el mensaje de correo inválido.                                                                                            |
+| UI-08 | Introducir contraseñas de 7 y 8 caracteres en el registro.                                                | La primera se rechaza y la segunda supera la regla de longitud. Se conserva el texto escrito, incluidos espacios.                                             |
+| UI-09 | Enviar contraseñas distintas o términos sin aceptar.                                                      | Mensaje específico para cada condición; no aparece feedback de validación completada.                                                                         |
+| UI-10 | Enviar login sin correo o sin contraseña.                                                                 | Mensaje del campo correspondiente; probar cada ausencia por separado.                                                                                         |
+| UI-11 | Introducir un teléfono vacío, de 6 caracteres y de 7 caracteres después de quitar espacios externos.      | Se rechazan los dos primeros y el último supera la regla de longitud de la plantilla.                                                                         |
+| UI-12 | Enviar login con datos válidos para la validación local.                                                  | Aviso de vista previa, sin recargar la página ni abandonar la vista de login.                                                                                 |
+| UI-13 | Enviar registro con todos los campos válidos, contraseñas coincidentes y términos aceptados.              | Aviso de vista previa, sin recargar la página ni abandonar la vista de registro.                                                                              |
+| UI-14 | Editar los datos después de un error o aviso.                                                             | Se limpia el feedback anterior y el formulario permite una nueva validación. Probar ambas vistas.                                                             |
+| UI-15 | Marcar y desmarcar «Recordarme».                                                                          | El control refleja el estado elegido y no altera los valores de los campos.                                                                                   |
+| UI-16 | Usar recuperación de contraseña, términos y privacidad.                                                   | Cada control muestra su aviso de vista previa correspondiente y mantiene el formulario visible.                                                               |
 
 Las pruebas usarán consultas por etiquetas, roles y nombres accesibles y
 comprobarán resultados visibles. Se evitarán aserciones sobre clases CSS o
@@ -126,8 +126,8 @@ contenido; la comparación visual se realizará por separado.
 
 ### Revisión visual
 
-| ID | Comprobación | Resultado esperado |
-| --- | --- | --- |
+| ID     | Comprobación                                                            | Resultado esperado                                                                                                                                                                                                    |
+| ------ | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | VIS-01 | Comparar las vistas React con las dos plantillas en escritorio y móvil. | Misma identidad visual y distribución; registro en una columna con contraseña y confirmación una debajo de la otra, campos legibles, controles accesibles, sin desbordamiento y con estados de foco y error visibles. |
 
 **Estado de VIS-01:** pendiente de completar para la versión final. Los tests

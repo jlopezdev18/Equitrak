@@ -14,14 +14,14 @@ del proyecto y usan Vercel React Best Practices.
 
 ## Comandos
 
-| Comando | Uso |
-| --- | --- |
-| `npm test` | Ejecutar las 37 pruebas de la UI. |
-| `npm run test:watch` | Repetir pruebas al guardar cambios. |
-| `npm run typecheck` | Comprobar los tipos de TypeScript. |
-| `npm run lint` | Revisar el código con Oxlint. |
-| `npm run build` | Comprobar tipos y compilar a `dist/`. |
-| `npm run preview` | Servir la compilación localmente. |
+| Comando              | Uso                                   |
+| -------------------- | ------------------------------------- |
+| `npm test`           | Ejecutar las 37 pruebas de la UI.     |
+| `npm run test:watch` | Repetir pruebas al guardar cambios.   |
+| `npm run typecheck`  | Comprobar los tipos de TypeScript.    |
+| `npm run lint`       | Revisar el código con Oxlint.         |
+| `npm run build`      | Comprobar tipos y compilar a `dist/`. |
+| `npm run preview`    | Servir la compilación localmente.     |
 
 ## Estructura
 

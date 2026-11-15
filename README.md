@@ -1,4 +1,5 @@
 # Equitrak
+
 Sistema de Gestión de Alquileres y Seguimiento de Equipos y Maquinaria.
 
 ## Especificaciones
@@ -84,3 +85,26 @@ Documentación: [Vitest](https://vitest.dev/guide/) y
 
 Desde `frontend/`, `npm run typecheck` verifica los tipos. `npm run build`
 ejecuta esa comprobación antes de compilar.
+
+## Formato, lint e integración continua
+
+Las herramientas compartidas se instalan desde la raíz con `npm ci`.
+Los comandos siguientes también se ejecutan desde la raíz:
+
+| Comando                | Acción                                                             |
+| ---------------------- | ------------------------------------------------------------------ |
+| `npm run format`       | Aplicar Prettier a todo el proyecto.                               |
+| `npm run format:check` | Comprobar el formato sin modificar archivos.                       |
+| `npm run lint`         | Revisar JavaScript y TypeScript de todo el proyecto con Oxlint.    |
+| `npm run lint:fix`     | Aplicar las correcciones automáticas seguras de Oxlint.            |
+| `npm run fix`          | Aplicar las correcciones de lint y después el formato de Prettier. |
+| `npm run check`        | Comprobar formato, lint y ejecutar todas las pruebas.              |
+
+Prettier incluye TypeScript, JavaScript, CSS, HTML, JSON, Markdown y YAML.
+Se excluyen dependencias, archivos generados, lockfiles y las skills de `.agents/`.
+Oxlint conserva las reglas React de `frontend/.oxlintrc.json` y revisa también
+el código del backend.
+
+El workflow [CI](.github/workflows/ci.yml) se ejecuta en cada push y pull request,
+y también permite ejecución manual. Usa Node.js 24, instala las dependencias
+de las tres carpetas con `npm ci` y comprueba formato, lint y las suites de Vitest.

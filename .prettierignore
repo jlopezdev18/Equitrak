@@ -1,0 +1,7 @@
+.agents/
+**/node_modules/
+**/dist/
+**/coverage/
+**/.vitest/
+**/*.tsbuildinfo
+**/package-lock.json

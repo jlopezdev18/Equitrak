@@ -35,6 +35,9 @@
 - Probar resultados observables mediante etiquetas, roles y nombres accesibles.
 - Ejecutar `npm run test:frontend` desde la raíz para verificar esta etapa.
   Al cambiar el frontend, ejecutar también su lint y compilación cuando corresponda.
+- Para verificar todo el proyecto y reproducir las comprobaciones de CI, ejecutar
+  `npm run check` desde la raíz. Usar `npm run format` para Prettier o
+  `npm run fix` para aplicar las correcciones de lint y el formato.
 
 ## CSS
 

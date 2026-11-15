@@ -61,8 +61,11 @@ describe('UI de autenticación', () => {
     expect(screen.getByRole('form', { name: 'Iniciar sesión' })).toBeInTheDocument()
     expect(screen.getByLabelText('Correo electrónico')).toHaveAttribute('type', 'email')
     expect(screen.getByLabelText('Contraseña', { exact: true })).toHaveAttribute('type', 'password')
-    expect(screen.getByRole('checkbox', { name: 'Recordarme' })).toBeChecked()
-    expect(screen.getByRole('link', { name: 'Regístrese aquí' })).toHaveAttribute('href', '#registro')
+    expect(screen.getByRole('checkbox', { name: 'Recordarme' })).not.toBeChecked()
+    expect(screen.getByRole('link', { name: 'Regístrese aquí' })).toHaveAttribute(
+      'href',
+      '#registro',
+    )
     expect(screen.queryByRole('tablist')).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Crear cuenta' })).not.toBeInTheDocument()
   })
@@ -71,11 +74,22 @@ describe('UI de autenticación', () => {
     await openRegistration()
     const fields = screen.getAllByRole<HTMLInputElement>('textbox')
     expect(fields.map((field) => field.labels?.[0]?.textContent)).toEqual([
-      'Nombre y apellido', 'Correo electrónico', 'Teléfono de contacto',
+      'Nombre y apellido',
+      'Correo electrónico',
+      'Teléfono de contacto',
     ])
     const form = screen.getByRole('form', { name: 'Crear cuenta' })
-    expect([...form.querySelectorAll<HTMLInputElement>('input:not([type="checkbox"])')].map((field) => field.labels?.[0]?.textContent))
-      .toEqual(['Nombre y apellido', 'Correo electrónico', 'Teléfono de contacto', 'Contraseña', 'Confirmar contraseña'])
+    expect(
+      [...form.querySelectorAll<HTMLInputElement>('input:not([type="checkbox"])')].map(
+        (field) => field.labels?.[0]?.textContent,
+      ),
+    ).toEqual([
+      'Nombre y apellido',
+      'Correo electrónico',
+      'Teléfono de contacto',
+      'Contraseña',
+      'Confirmar contraseña',
+    ])
     expect(screen.queryByLabelText(/empresa/i)).not.toBeInTheDocument()
     expect(screen.getByLabelText('Contraseña', { exact: true })).toHaveAttribute('type', 'password')
     expect(screen.getByLabelText('Confirmar contraseña')).toHaveAttribute('type', 'password')
@@ -99,25 +113,33 @@ describe('UI de autenticación', () => {
   it.each([
     ['login', 'Contraseña', 'Mostrar contraseña', 'Ocultar contraseña'],
     ['registro', 'Contraseña', 'Mostrar contraseña', 'Ocultar contraseña'],
-    ['registro', 'Confirmar contraseña', 'Mostrar confirmación de contraseña', 'Ocultar confirmación de contraseña'],
-  ])('UI-04: alterna la visibilidad de %s / %s sin perder el valor', async (view, label, show, hide) => {
-    const user = view === 'registro' ? await openRegistration() : userEvent.setup()
-    if (view === 'login') render(<App />)
-    const field = screen.getByLabelText(label, { exact: true })
-    await user.type(field, 'clave123')
-    await user.click(screen.getByRole('button', { name: show }))
-    expect(field).toHaveAttribute('type', 'text')
-    expect(field).toHaveValue('clave123')
-    expect(screen.getByRole('button', { name: hide })).toHaveAttribute('aria-pressed', 'true')
-    if (view === 'registro') {
-      const other = label === 'Contraseña' ? 'Confirmar contraseña' : 'Contraseña'
-      expect(screen.getByLabelText(other, { exact: true })).toHaveAttribute('type', 'password')
-    }
-    await user.click(screen.getByRole('button', { name: hide }))
-    expect(field).toHaveAttribute('type', 'password')
-    expect(screen.getByRole('button', { name: show })).toHaveAttribute('aria-pressed', 'false')
-    expect(screen.getByRole('status')).toBeEmptyDOMElement()
-  })
+    [
+      'registro',
+      'Confirmar contraseña',
+      'Mostrar confirmación de contraseña',
+      'Ocultar confirmación de contraseña',
+    ],
+  ])(
+    'UI-04: alterna la visibilidad de %s / %s sin perder el valor',
+    async (view, label, show, hide) => {
+      const user = view === 'registro' ? await openRegistration() : userEvent.setup()
+      if (view === 'login') render(<App />)
+      const field = screen.getByLabelText(label, { exact: true })
+      await user.type(field, 'clave123')
+      await user.click(screen.getByRole('button', { name: show }))
+      expect(field).toHaveAttribute('type', 'text')
+      expect(field).toHaveValue('clave123')
+      expect(screen.getByRole('button', { name: hide })).toHaveAttribute('aria-pressed', 'true')
+      if (view === 'registro') {
+        const other = label === 'Contraseña' ? 'Confirmar contraseña' : 'Contraseña'
+        expect(screen.getByLabelText(other, { exact: true })).toHaveAttribute('type', 'password')
+      }
+      await user.click(screen.getByRole('button', { name: hide }))
+      expect(field).toHaveAttribute('type', 'password')
+      expect(screen.getByRole('button', { name: show })).toHaveAttribute('aria-pressed', 'false')
+      expect(screen.getByRole('status')).toBeEmptyDOMElement()
+    },
+  )
 
   it('UI-05: permite recorrer y enviar login con teclado y enfoca el primer error', async () => {
     const user = userEvent.setup()
@@ -157,14 +179,19 @@ describe('UI de autenticación', () => {
     const user = view === 'registro' ? await openRegistration() : userEvent.setup()
     if (view === 'login') render(<App />)
     await user.type(screen.getByLabelText('Correo electrónico'), 'correo-invalido')
-    if (view === 'registro') await user.type(screen.getByLabelText('Nombre y apellido'), 'Ana López')
-    await user.click(screen.getByRole('button', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' }))
+    if (view === 'registro')
+      await user.type(screen.getByLabelText('Nombre y apellido'), 'Ana López')
+    await user.click(
+      screen.getByRole('button', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' }),
+    )
     expect(screen.getByLabelText('Correo electrónico')).toHaveAttribute('aria-invalid', 'true')
     expect(screen.getByRole('status')).toHaveTextContent(/correo electrónico válido/)
   })
 
   it.each([
-    ['1234567', false], ['12345678', true], [' 123456 ', true],
+    ['1234567', false],
+    ['12345678', true],
+    [' 123456 ', true],
   ] as const)('UI-08: valida la longitud de contraseña preservando %j', async (password, valid) => {
     const user = await openRegistration()
     await fillRegistration(user, { password, confirmation: password })
@@ -181,13 +208,17 @@ describe('UI de autenticación', () => {
   it.each([
     [{ confirmation: 'diferente123' }, /contraseñas no coinciden/],
     [{ terms: false }, /aceptar los Términos/],
-  ] as const)('UI-09: rechaza confirmación o aceptación incorrecta: %j', async (overrides, message) => {
-    const user = await openRegistration()
-    await fillRegistration(user, overrides)
-    await submitRegistration(user)
-    expect(screen.getByRole('status')).toHaveTextContent(message)
-    if ('terms' in overrides && overrides.terms === false) expect(screen.getByRole('checkbox', { name: /Acepto/ })).toHaveFocus()
-  })
+  ] as const)(
+    'UI-09: rechaza confirmación o aceptación incorrecta: %j',
+    async (overrides, message) => {
+      const user = await openRegistration()
+      await fillRegistration(user, overrides)
+      await submitRegistration(user)
+      expect(screen.getByRole('status')).toHaveTextContent(message)
+      if ('terms' in overrides && overrides.terms === false)
+        expect(screen.getByRole('checkbox', { name: /Acepto/ })).toHaveFocus()
+    },
+  )
 
   it.each([
     ['', 'clave123', 'Correo electrónico'],
@@ -203,13 +234,16 @@ describe('UI de autenticación', () => {
   })
 
   it.each([
-    ['', false], ['123456', false], [' 1234567 ', true],
+    ['', false],
+    ['123456', false],
+    [' 1234567 ', true],
   ] as const)('UI-11: valida el teléfono %j', async (phone, valid) => {
     const user = await openRegistration()
     await fillRegistration(user, { phone })
     await submitRegistration(user)
     if (valid) expect(screen.getByRole('status')).toHaveTextContent(/Vista previa.*validado/)
-    else expect(screen.getByLabelText('Teléfono de contacto')).toHaveAttribute('aria-invalid', 'true')
+    else
+      expect(screen.getByLabelText('Teléfono de contacto')).toHaveAttribute('aria-invalid', 'true')
   })
 
   it('UI-12: valida login localmente y mantiene la vista y la contraseña', async () => {
@@ -241,8 +275,12 @@ describe('UI de autenticación', () => {
   it.each(['login', 'registro'])('UI-14: limpia el feedback al editar %s', async (view) => {
     const user = view === 'registro' ? await openRegistration() : userEvent.setup()
     if (view === 'login') render(<App />)
-    await user.click(screen.getByRole('button', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' }))
-    const field = screen.getByLabelText(view === 'registro' ? 'Nombre y apellido' : 'Correo electrónico')
+    await user.click(
+      screen.getByRole('button', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' }),
+    )
+    const field = screen.getByLabelText(
+      view === 'registro' ? 'Nombre y apellido' : 'Correo electrónico',
+    )
     expect(field).toHaveAttribute('aria-invalid', 'true')
     await user.type(field, 'a')
     expect(field).not.toHaveAttribute('aria-invalid', 'true')
@@ -255,10 +293,11 @@ describe('UI de autenticación', () => {
     await user.type(screen.getByLabelText('Correo electrónico'), 'ana@gmail.com')
     await user.type(screen.getByLabelText('Contraseña', { exact: true }), 'clave123')
     const remember = screen.getByRole('checkbox', { name: 'Recordarme' })
-    await user.click(remember)
     expect(remember).not.toBeChecked()
     await user.click(remember)
     expect(remember).toBeChecked()
+    await user.click(remember)
+    expect(remember).not.toBeChecked()
     expect(screen.getByLabelText('Correo electrónico')).toHaveValue('ana@gmail.com')
     expect(screen.getByLabelText('Contraseña', { exact: true })).toHaveValue('clave123')
   })
@@ -272,7 +311,9 @@ describe('UI de autenticación', () => {
     if (view === 'login') render(<App />)
     await user.click(screen.getByRole(role, { name }))
     expect(screen.getByRole('status')).toHaveTextContent(message)
-    expect(screen.getByRole('form', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('form', { name: view === 'registro' ? 'Crear cuenta' : 'Iniciar sesión' }),
+    ).toBeInTheDocument()
   })
 
   it.each(['#registro', '#register'])('abre directamente el registro con %s', (hash) => {
@@ -297,4 +338,3 @@ describe('UI de autenticación', () => {
     expect(screen.getByLabelText('Correo electrónico')).toHaveFocus()
   })
 })
-

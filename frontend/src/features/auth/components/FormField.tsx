@@ -8,19 +8,36 @@ export interface FormFieldProps extends ComponentPropsWithRef<'input'> {
   error?: string
 }
 
-export default function FormField({ id, label, icon, error, children, ...inputProps }: FormFieldProps) {
+export default function FormField({
+  id,
+  label,
+  icon,
+  error,
+  children,
+  ...inputProps
+}: FormFieldProps) {
   const errorId = `${id}-error`
 
   return (
     <div className="field">
-      <label className="form-label" htmlFor={id}>{label}</label>
+      <label className="form-label" htmlFor={id}>
+        {label}
+      </label>
       <div className="field-inner">
         <Icon name={icon} className="field-icon" />
-        <input {...inputProps} id={id} aria-invalid={Boolean(error) || undefined}
-          aria-describedby={error ? errorId : undefined} />
+        <input
+          {...inputProps}
+          id={id}
+          aria-invalid={Boolean(error) || undefined}
+          aria-describedby={error ? errorId : undefined}
+        />
         {children}
       </div>
-      {error ? <span id={errorId} className="field-error">{error}</span> : null}
+      {error ? (
+        <span id={errorId} className="field-error">
+          {error}
+        </span>
+      ) : null}
     </div>
   )
 }

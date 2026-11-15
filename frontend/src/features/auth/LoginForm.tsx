@@ -8,7 +8,12 @@ import { emailRules } from './validation.ts'
 import type { FormNavigationProps, LoginValues, PreviewFeedback } from './types.ts'
 
 export default function LoginForm({ onNavigate, autoFocus }: FormNavigationProps) {
-  const { register, handleSubmit, clearErrors, formState: { errors } } = useForm<LoginValues>({
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<LoginValues>({
     defaultValues: { email: '', password: '', remember: false },
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
@@ -32,16 +37,41 @@ export default function LoginForm({ onNavigate, autoFocus }: FormNavigationProps
   }
 
   return (
-    <form className="form" id="sign-in" aria-label="Iniciar sesión" noValidate
-      onSubmit={handleSubmit(() => setPreview({ type: 'success', message: 'Vista previa: formulario de inicio de sesión validado.' }))}
-      onChange={clearFeedback}>
-      <FormField id="email" label="Correo electrónico" icon="mail" {...register('email', emailRules)}
-        type="email" autoComplete="username" inputMode="email" placeholder="Ingrese su correo electrónico"
-        required autoFocus={autoFocus} error={errors.email?.message} />
-      <PasswordField id="password" label="Contraseña"
+    <form
+      className="form"
+      id="sign-in"
+      aria-label="Iniciar sesión"
+      noValidate
+      onSubmit={handleSubmit(() =>
+        setPreview({
+          type: 'success',
+          message: 'Vista previa: formulario de inicio de sesión validado.',
+        }),
+      )}
+      onChange={clearFeedback}
+    >
+      <FormField
+        id="email"
+        label="Correo electrónico"
+        icon="mail"
+        {...register('email', emailRules)}
+        type="email"
+        autoComplete="username"
+        inputMode="email"
+        placeholder="Ingrese su correo electrónico"
+        required
+        autoFocus={autoFocus}
+        error={errors.email?.message}
+      />
+      <PasswordField
+        id="password"
+        label="Contraseña"
         {...register('password', { required: 'Por favor, ingrese su contraseña.' })}
-        autoComplete="current-password" placeholder="Ingrese su contraseña" required
-        error={errors.password?.message} />
+        autoComplete="current-password"
+        placeholder="Ingrese su contraseña"
+        required
+        error={errors.password?.message}
+      />
       <div className="options">
         <label className="remember">
           <input type="checkbox" {...register('remember')} />
@@ -51,10 +81,16 @@ export default function LoginForm({ onNavigate, autoFocus }: FormNavigationProps
           ¿Olvidó su contraseña?
         </button>
       </div>
-      <button className="submit" type="submit">Iniciar sesión <Icon name="arrow" /></button>
+      <button className="submit" type="submit">
+        Iniciar sesión <Icon name="arrow" />
+      </button>
       <p className="auth-switch">
         ¿No tiene una cuenta?{' '}
-        <a className="switch-link" href="#registro" onClick={(event) => onNavigate(event, 'register')}>
+        <a
+          className="switch-link"
+          href="#registro"
+          onClick={(event) => onNavigate(event, 'register')}
+        >
           Regístrese aquí
         </a>
       </p>
